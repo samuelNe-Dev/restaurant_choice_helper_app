@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "732699499178",
+    "project_id": "restaurantchoicehelper",
+    "storage_bucket": "restaurantchoicehelper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732699499178:android:57b8013f4b1e1cf20c0ed3",
+        "android_client_info": {
+          "package_name": "com.example.restaurant_choice_helper_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732699499178-0u45dgm8bu5f41tsni8r5kvrrkh3linv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMMrXv0Ecz-eSHzFXY4h7RijZZS7tqRWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "732699499178-0u45dgm8bu5f41tsni8r5kvrrkh3linv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "732699499178-863rtiqf6os4v22k7kfsrqqdmesrk12e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.flutter.flutter.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
