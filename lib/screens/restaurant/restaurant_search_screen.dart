@@ -10,7 +10,7 @@ class RestaurantSearchScreen extends StatefulWidget {
 }
 
 class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
-  String? _searchedTerm;
+  String _searchedTerm = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +39,7 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                 style: TextStyle(fontSize: 22),
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Theme.of(context).primaryColorLight,
+                  fillColor: Color(0xFFE7EBEE),
                   contentPadding: EdgeInsets.all(0),
                   prefixIcon: Icon(
                     Icons.search,
@@ -49,7 +49,6 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  focusColor: Theme.of(context).primaryColor,
                 ),
               ),
             ),
@@ -61,17 +60,22 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
               itemCount: restaurants.length,
               itemBuilder: (context, index) {
                 Restaurant restaurant = restaurants[index];
-                if(_searchedTerm != ""){
-
+                if (_searchedTerm != "") {
                   if ((restaurant.name.toLowerCase() ==
-                          _searchedTerm?.toLowerCase()) ||
+                          _searchedTerm.toLowerCase()) ||
                       (restaurant.type.toLowerCase() ==
-                          _searchedTerm?.toLowerCase())) {
+                          _searchedTerm.toLowerCase()) ||
+                      (restaurant.name
+                          .toLowerCase()
+                          .contains(_searchedTerm.toLowerCase())) ||
+                      (restaurant.type
+                          .toLowerCase()
+                          .contains(_searchedTerm.toLowerCase()))) {
                     return SearchTile(index: index);
                   } else {
                     return Container();
                   }
-                }else{
+                } else {
                   return SearchTile(index: index);
                 }
                 //  SearchTile(index: index);
@@ -111,48 +115,57 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                 ),
                 SizedBox(width: 30),
                 Flexible(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        restaurant.name,
-                        style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.w600),
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        restaurant.description,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 13.0,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Row(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 12.0),
+                    child: Container(
+                      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey, width: 0.3))),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(
-                            FontAwesomeIcons.mapMarkerAlt,
-                            size: 13,
-                            color: Colors.grey[600],
+                          Text(
+                            restaurant.name,
+                            style: TextStyle(
+                                fontSize: 16.0, fontWeight: FontWeight.w600),
                           ),
                           SizedBox(
-                            width: 4,
+                            height: 4,
                           ),
                           Text(
-                            restaurant.city,
+                            restaurant.description,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 13.0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.mapMarkerAlt,
+                                size: 13,
+                                color: Colors.grey[600],
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                restaurant.city,
+                                style: TextStyle(fontSize: 13.0),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "ca. " + restaurant.distance.toString() + " km",
                             style: TextStyle(fontSize: 13.0),
+                          ),
+                          SizedBox(
+                            height: 4,
                           ),
                         ],
                       ),
-                      Text(
-                        "ca. " + restaurant.distance.toString() + " km",
-                        style: TextStyle(fontSize: 13.0),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ],
