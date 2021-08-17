@@ -49,7 +49,7 @@ class RestaurantCarousel extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => RestaurantScreen()),
+                              builder: (context) => RestaurantScreen(restaurant: restaurants[index],)),
                         );
                       },
                       child: Column(

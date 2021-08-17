@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restaurant_choice_helper_app/models/restaurant_model.dart';
+import 'package:restaurant_choice_helper_app/screens/restaurant/restaurant_screen.dart';
 
 class RestaurantSearchScreen extends StatefulWidget {
   const RestaurantSearchScreen({Key? key}) : super(key: key);
@@ -92,9 +93,13 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
     Restaurant restaurant = restaurants[index];
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () {
-        print(restaurant.name + " wurde angeklickt!");
-      },
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => RestaurantScreen(
+                  restaurant: restaurants[index],
+                )),
+      ),
       child: Container(
         child: SingleChildScrollView(
           child: Padding(
@@ -103,13 +108,16 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      restaurant.imageUrl,
-                      fit: BoxFit.cover,
-                      width: size.width * 0.2,
-                      height: size.width * 0.2,
+                  child: Hero(
+                    tag: restaurants[index].imageUrl,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(
+                        restaurant.imageUrl,
+                        fit: BoxFit.cover,
+                        width: size.width * 0.2,
+                        height: size.width * 0.2,
+                      ),
                     ),
                   ),
                 ),
@@ -118,7 +126,10 @@ class _RestaurantSearchScreenState extends State<RestaurantSearchScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 12.0),
                     child: Container(
-                      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey, width: 0.3))),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom:
+                                  BorderSide(color: Colors.grey, width: 0.3))),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

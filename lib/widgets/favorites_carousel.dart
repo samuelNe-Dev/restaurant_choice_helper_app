@@ -47,7 +47,12 @@ class FavoriteCarousel extends StatelessWidget {
                   itemCount: favourites.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: () {RestaurantScreen();},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RestaurantScreen(restaurant: favourites[index],)));
+                        },
                       child: Column(
                         children: <Widget>[
                           Padding(
@@ -62,7 +67,7 @@ class FavoriteCarousel extends StatelessWidget {
                                   topRight: Radius.circular(20.0)),
                               child: Image.asset(
                                 favourites[index].imageUrl,
-                                fit: BoxFit.cover,
+                                fit:  BoxFit.cover,
                                 width: size.width * 0.4,
                                 height: size.width * 0.4,
                               ),
